@@ -20,7 +20,7 @@ if ($user) {
     $del->execute(['id' => $id]);
 
     if ($user['photo']) {
-        $path = __DIR__ . '/../' . ltrim($user['photo'], '/');
+        $path = dirname(__DIR__, 2) . $user['photo'];
         if (is_file($path)) {
             @unlink($path);
         }

@@ -3,9 +3,9 @@
  * Connexion à la base de données via PDO
  * Modifie les constantes ci-dessous selon ton environnement.
  */
-// ini_set('display_errors', 1);
-// ini_set('display_startup_errors', 1);
-// error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 define('DB_HOST', '127.0.0.1');
 define('DB_NAME', 'hazinafunding');
@@ -14,8 +14,8 @@ define('DB_PASS', 'Friend2024');
 define('DB_CHARSET', 'utf8mb4');
 
 // Chemin absolu vers le dossier uploads (utilisé par les modules projects/users)
-define('UPLOAD_DIR', __DIR__ . '/../assets/uploads/');
-define('UPLOAD_URL', 'assets/uploads/');
+define('UPLOAD_DIR', dirname(__DIR__, 2) . '/uploads/');
+define('UPLOAD_URL', '/uploads/');
 
 function getPDO(): PDO
 {

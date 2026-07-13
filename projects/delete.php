@@ -19,12 +19,12 @@ if ($project) {
 
     $allImagePaths = array_unique(array_filter(array_merge([$project['image']], $galleryPaths)));
     foreach ($allImagePaths as $imgPath) {
-        $path = __DIR__ . '/../' . ltrim($imgPath, '/');
+        $path = dirname(__DIR__, 2) . $imgPath;
         if (is_file($path)) @unlink($path);
     }
 
     if ($project['video']) {
-        $vpath = __DIR__ . '/../' . ltrim($project['video'], '/');
+        $vpath = dirname(__DIR__, 2) . $project['video'];
         if (is_file($vpath)) @unlink($vpath);
     }
 

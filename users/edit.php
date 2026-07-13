@@ -155,8 +155,7 @@ require_once __DIR__ . '/../includes/header.php';
           <label class="form-label">Photo</label>
           <?php if ($user['photo']): ?>
             <div class="mb-2">
-              <img src="<?= e('../' . ltrim($user['photo'], '/')) ?>" class="thumb" style="width:60px;height:60px;" onerror="this.src='https://placehold.co/60x60?text=%20'">
-            </div>
+          <img src="<?= e($user['photo']) ?>" class="thumb" style="width:60px;height:60px;" onerror="this.src='https://placehold.co/60x60?text=%20'">            </div>
           <?php endif; ?>
           <input type="file" name="photo" class="form-control" accept="image/*">
         </div>

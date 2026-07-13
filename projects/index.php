@@ -73,12 +73,13 @@ require_once __DIR__ . '/../includes/header.php';
       <tbody>
       <?php foreach ($projects as $p):
         $pct = $p['goal_amount'] > 0 ? min(100, round($p['raised_amount'] / $p['goal_amount'] * 100)) : 0;
+$pctDisplay = ($pct == 0 && $p['raised_amount'] > 0) ? 2 : $pct;
         $imgSrc = $p['image'] ? '../' . ltrim($p['image'], '/') : null;
       ?>
         <tr>
           <td>
-            <?php if ($imgSrc): ?>
-              <img src="<?= e($imgSrc) ?>" class="thumb" alt="" onerror="this.onerror=null;this.src='https://placehold.co/48x48?text=%20';">
+            <?php if ($p['image']): ?>
+              <img src="<?= e($p['image']) ?>" class="thumb" alt="" onerror="this.onerror=null;this.src='https://placehold.co/48x48?text=%20';">
             <?php else: ?>
               <div class="thumb bg-light d-flex align-items-center justify-content-center"><i class="bi bi-image text-muted"></i></div>
             <?php endif; ?>
@@ -91,7 +92,7 @@ require_once __DIR__ . '/../includes/header.php';
           <td><?= money((float)$p['goal_amount']) ?></td>
           <td><?= money((float)$p['raised_amount']) ?></td>
           <td style="width:140px;">
-            <div class="progress"><div class="progress-bar bg-danger" style="width: <?= $pct ?>%"></div></div>
+            <div class="progress"><div class="progress-bar bg-danger" style="width: <?= $pctDisplay ?>%"></div></div>
             <small class="text-muted"><?= $pct ?>%</small>
           </td>
           <td>

@@ -15,12 +15,12 @@ if ($donation) {
     $del = $pdo->prepare('DELETE FROM donations WHERE id = :id');
     $del->execute(['id' => $id]);
 
-    $recalc = $pdo->prepare(
-        "UPDATE projects SET raised_amount = (
-            SELECT COALESCE(SUM(amount), 0) FROM donations WHERE project_id = :pid AND status = 'completed'
-         ) WHERE id = :pid"
-    );
-    $recalc->execute(['pid' => $donation['project_id']]);
+   $recalc = $pdo->prepare(
+    "UPDATE projects SET raised_amount = (
+        SELECT COALESCE(SUM(amount), 0) FROM donations WHERE project_id = :pid1 AND status = 'completed'
+     ) WHERE id = :pid2"
+);
+$recalc->execute(['pid1' => $donation['project_id'], 'pid2' => $donation['project_id']]);
 
     $pdo->commit();
 

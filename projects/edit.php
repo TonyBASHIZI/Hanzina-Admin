@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $del->execute([...$toDelete, $id]);
 
             foreach ($rows as $row) {
-                $path = __DIR__ . '/../' . ltrim($row['image_path'], '/');
+                $path = dirname(__DIR__, 2) . $row['image_path'];
                 if (is_file($path)) @unlink($path);
             }
         }
@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $videoPath = $project['video'];
         if (!empty($_POST['remove_video'])) {
             if ($videoPath) {
-                $vpath = __DIR__ . '/../' . ltrim($videoPath, '/');
+                $vpath = dirname(__DIR__, 2) . $videoPath;
                 if (is_file($vpath)) @unlink($vpath);
             }
             $videoPath = null;
@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $newVideo = handleVideoUpload('video');
         if ($newVideo) {
             if ($videoPath) {
-                $vpath = __DIR__ . '/../' . ltrim($videoPath, '/');
+                $vpath = dirname(__DIR__, 2) . $videoPath;
                 if (is_file($vpath)) @unlink($vpath);
             }
             $videoPath = $newVideo;
@@ -188,7 +188,7 @@ require_once __DIR__ . '/../includes/header.php';
           <div class="d-flex flex-wrap gap-3 mb-3">
             <?php foreach ($galleryImages as $img): ?>
               <div class="text-center border rounded p-2 <?= $img['is_default'] ? 'border-danger border-2' : '' ?>">
-                <img src="<?= e('../' . ltrim($img['image_path'], '/')) ?>" style="width:90px;height:90px;object-fit:cover;border-radius:.3rem;" onerror="this.onerror=null;this.src='https://placehold.co/90x90?text=%20';">
+                <img src="<?= e($img['image_path']) ?>" style="width:90px;height:90px;object-fit:cover;border-radius:.3rem;" onerror="this.src='https://placehold.co/90x90?text=%20'">
                 <div class="form-check form-check-inline mt-1 d-block">
                   <input class="form-check-input" type="radio" name="default_choice" value="existing:<?= (int)$img['id'] ?>" <?= $img['is_default'] ? 'checked' : '' ?>>
                   <small>Défaut</small>
@@ -215,7 +215,7 @@ require_once __DIR__ . '/../includes/header.php';
       <div class="mb-3">
         <label class="form-label fw-semibold">Vidéo</label><br>
         <?php if ($project['video']): ?>
-          <video src="<?= e('../' . ltrim($project['video'], '/')) ?>" controls style="max-width:280px;" class="d-block mb-2 rounded"></video>
+          <video src="<?= e($project['video']) ?>" controls style="max-width:280px;" class="d-block mb-2 rounded"></video>
           <div class="form-check mb-2">
             <input class="form-check-input" type="checkbox" name="remove_video" value="1" id="removeVideo">
             <label class="form-check-label text-danger" for="removeVideo">Supprimer la vidéo actuelle</label>
