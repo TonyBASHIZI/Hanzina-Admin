@@ -168,8 +168,13 @@ require_once __DIR__ . '/../includes/header.php';
       <div class="row">
         <div class="col-md-6 mb-3">
           <label class="form-label">Catégorie</label>
-          <input type="text" name="category" class="form-control" value="<?= e($data['category']) ?>">
-        </div>
+          <select name="category" class="form-select">
+              <option value="">— Choisir une catégorie —</option>
+              <?php foreach (['Éducation', 'Santé', 'Urgence humanitaire', 'Alimentation', 'Eau & Assainissement', 'Logement', 'Infrastructures & Routes', 'Orphelinat', 'Personnes déplacées & Réfugiés', 'Personnes âgées', 'Personnes handicapées', 'Autonomisation des femmes', 'Agriculture', 'Environnement', 'Sport & Culture', 'Technologie & Innovation', 'Autre'] as $cat): ?>
+                  <option value="<?= e($cat) ?>" <?= $data['category'] === $cat ? 'selected' : '' ?>><?= e($cat) ?></option>
+              <?php endforeach; ?>
+          </select>
+      </div>
         <div class="col-md-6 mb-3">
           <label class="form-label">Statut</label>
           <select name="status" class="form-select">

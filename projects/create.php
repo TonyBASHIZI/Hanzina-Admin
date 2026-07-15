@@ -107,9 +107,14 @@ require_once __DIR__ . '/../includes/header.php';
           <input type="number" step="0.01" min="0" name="goal_amount" class="form-control" required value="<?= e($data['goal_amount']) ?>">
         </div>
         <div class="col-md-6 mb-3">
-          <label class="form-label">Catégorie</label>
-          <input type="text" name="category" class="form-control" value="<?= e($data['category']) ?>">
-        </div>
+        <label class="form-label">Catégorie</label>
+        <select name="category" class="form-select">
+            <option value="">— Choisir une catégorie —</option>
+            <?php foreach (['Éducation', 'Santé', 'Urgence humanitaire', 'Alimentation', 'Eau & Assainissement', 'Logement', 'Infrastructures & Routes', 'Orphelinat', 'Personnes déplacées & Réfugiés', 'Personnes âgées', 'Personnes handicapées', 'Autonomisation des femmes', 'Agriculture', 'Environnement', 'Sport & Culture', 'Technologie & Innovation', 'Autre'] as $cat): ?>
+                <option value="<?= e($cat) ?>" <?= $data['category'] === $cat ? 'selected' : '' ?>><?= e($cat) ?></option>
+            <?php endforeach; ?>
+        </select>
+    </div>
       </div>
 
       <div class="mb-3">
